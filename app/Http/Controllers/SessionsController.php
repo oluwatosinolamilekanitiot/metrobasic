@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -23,15 +24,22 @@ class SessionsController extends Controller
 
 
     
-    public function store()
+    public function store(Request $request)
     {
-        if (auth()->attempt(request(['email','password']))) {
-            // Authentication passed...
-            return view('users.home');
+        
+        
+        $validator = Validator::make($request->all(), [
+			'email'=>'required',
+			'password'=>'required',
             
-        }
+            ]);
+        
+		if(!Auth::attempt($request->only(['email','password']), $request->has('remember'))) {
 
-        return back();
+			return redirect()->back()->with('info', 'Counld not sign you in with those details!');
+		}
+        
+		return redirect()->route('home');
     
     }
 

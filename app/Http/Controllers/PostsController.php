@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-
+use Image;
 use App\Usedpin;
 use App\Post;
 use App\Pin;
-use App\Image;
+// use App\Image;
 use Validator;
 use Auth;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+// use Storage;
 
 
 class PostsController extends Controller
@@ -61,10 +62,15 @@ class PostsController extends Controller
     {
 
             //validate the form request and save
-            $validatedData = $request->validate([
-            'random' => 'required',
+            // $validatedData = $request->validate([
+            // 'random' => 'required',
                
-            ]);
+            // ]);
+            $validator = Validator::make($request->all(), [
+                'random' => 'required',
+    
+                ]);
+            
             $pin = Pin::where('numbers', $request->random)->first();
             if($pin)
             {
@@ -92,34 +98,49 @@ class PostsController extends Controller
             $usedPin = Usedpin::where('pin_id', $pin->id)->first();
             if(!$usedPin || $usedPin->status <= 3){
                 
-                $validatedData = $request->validate([
-                'title' => 'required|max:255',
-                'body' => 'required',
-            ]);
+            //     $validatedData = $request->validate([
+            //     'title' => 'required|max:255',
+            //     'body' => 'required',
+            // ]);
                     
-        
-            // dd($request->all());
-            
-           
-            $post = new Post;
-            $post->user_id=Auth::user()->id;
-            $post->post_id=Auth::user()->id;
-            
-            $post->title = $request->title;
-            //  $post->file = $request->file;
-             $post->body = $request->body;
-            //  $post->title = $request->input('title');
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|max:255',
+                'file' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'body' => 'required',
+                ]);
+                
+                
+                            $post = new Post;
+                        $post->user_id=Auth::user()->id;
+                        $post->post_id=Auth::user()->id;
+                        $post->title = $request->title;
+                        //  $post->file = $request->file;
+                        $post->body = $request->body;
+                        //  $post->title = $request->input('title');
 
-            // save images
-            if($request->hasFile['featured_image']){
-                $image = $request->file('featured_image');
-                $filename = time() . '.' . $image->getClientOriginalExtension();
-                $location = public_path('images/' . $filename);
-                Image::make($image)->resize(800,400)->save($location);
+                        // save images
 
-                $post->image = $filename;
-            }
-            $post->save();
+                        // if($request->hasFile('file'))
+                        // {
+    
+                            $path = Storage::putFile('avatars', $request->file('avatar'));
+                            
+                            $image = $request->file('image');
+                            $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+                        $destinationPath = public_path('images');
+                            $img = Image::make($image->getRealPath(),array(
+                                'width' => 100,
+                                'height' => 100,
+                                'grayscale' => false
+                            ));
+                            $img->save($destinationPath.'/'.$input['imagename']);
+                            $destinationPath = public_path('images');
+                            $image->move($destinationPath, $input['imagename']);
+                        
+                        // }
+    
+                        
+                             $post->save();
 
             // dd($request->all());       
             if(!$usedPin){

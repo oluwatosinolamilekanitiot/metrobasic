@@ -6,7 +6,7 @@
 
     <div class="container">
 
-      <form class="login-form" action="{{ route('login') }}" method="POST"> 
+      <form class="login-form" action="/sign" method="POST"> 
             {{ csrf_field() }}
             @include('partials.errors')
         <div class="login-wrap">

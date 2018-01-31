@@ -84,15 +84,21 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Auth::routes();
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/signup', 'RegistrationsController@signup');
     Route::post('/signup', 'RegistrationsController@create');
     Route::get('/logout', 'SessionsController@destroy');
+    Route::get('/sign', 'SessionsController@login');
+    Route::post('/sign', 'SessionsController@store');
+    
     //end
 
     
     Route::get('contactus','Admincontroller@contactus');    
     
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Excel;
 use DB;
 use App\Pin;
 use App\Usedpin;
@@ -17,17 +18,40 @@ class PinsController extends Controller
     public function enterpin(Request $request)
     {
             
-        $numbers=Pin::paginate(10);
+        $numbers=Pin::paginate(500);
         return view ('adminpanel.enterpin',compact('numbers',$numbers));
     }
 
-   
+    public function exportExcel(Request $request) {
+        $this->prepareExportingData($request)->export('xlsx');
+        redirect()->intended('adminpanel.enterpin',compact('numbers',$numbers));
+    }
 
+    
+    private function prepareExportingData($request) {
+        $numbers = Auth::user()->username;
+        $numbers = $this->getExportingData(['from'=> $request['from'], 'to' => $request['to']]);
+        return Excel::create('report_from_'. $request['from'].'_to_'.$request['to'], function($excel) use($employees, $request, $author) {
+
+        // Set the title
+        $excel->setTitle('List of PINS GENERATED '. $request['from'].' to '. $request['to']);
+
+        // Chain the setters
+        $excel->setCreator($numbers)
+            ->setCompany('HoaDang');
+
+        // Call them separately
+        $excel->setDescription('The list of hired employees');
+
+        $excel->sheet('Hired_Employees', function($sheet) use($employees) {
+
+        $sheet->fromArray($$numbers);
+            });
+        });
+    }
    
     public function create(Request $request)
     {   
-
-        
         $numbers=[];
         $validatedData = $request->validate([
             'random' => 'required',      

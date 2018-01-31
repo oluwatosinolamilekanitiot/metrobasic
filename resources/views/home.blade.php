@@ -15,7 +15,7 @@
 <!-- Slider main container -->
 <div class="swiper-container main-slider" id="myCarousel">
   <div class="swiper-wrapper">
-    <div class="swiper-slide slider-bg-position" style="background:url('http://grafreez.com/wp-content/temp_demos/burnout/img/1.jpg')" data-hash="slide1">
+    <div class="swiper-slide slider-bg-position" style="background:url('http://https://nces.ed.gov/programs/coe/images/nav/coe_hp_new.png')" data-hash="slide1">
       <h2>Integrity without knowledge is weak and useless, and knowledge without integrity is danger and dreadful</h2>
     </div>
     <div class="swiper-slide slider-bg-position"  style="background:url('http://grafreez.com/wp-content/temp_demos/burnout/img/3.jpg')" data-hash="slide2">

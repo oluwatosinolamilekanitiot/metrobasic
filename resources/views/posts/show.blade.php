@@ -278,9 +278,9 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$post->title}}</td>
                                 <td>{{$post->file}}</td>
-                                <td>{{$post->body}}</td>
+                                {{--  <td>{{$post->body}}</td>
                                 <a href="posts/{{$post->id}}"
-                                <td>{{$post->body}}</td>
+                                <td>{{$post->body}}</td>  --}}
                                 </a>
                                 <td>{{$post->created_at->toDateTimeString()}}</td>
                 </tr>

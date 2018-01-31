@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\User;
 use Auth;
 use Hash;
-// use 
 
 use Validator;
 use Illuminate\Http\Request;
@@ -27,13 +27,15 @@ class RegistrationsController extends Controller
     public  function create(Request $request)
     {
         
-        $validatedData = $request->validate([
-        'name' => 'required|unique:users|',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users|',
         'email' => 'required|unique:users',
         'number' => 'required|unique:users',
         'password' => 'required|min:8|confirmed',      
 
-        ]);
+            ]);
+        
+        
         
         
         $user= New User;
@@ -45,7 +47,6 @@ class RegistrationsController extends Controller
 
          $user->save();
 
-        
             Auth::login($user);
             //redirect
             
