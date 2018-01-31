@@ -85,8 +85,7 @@ class AdminController extends Controller
 
     public function tryto()
     {
-        $numbers=Pin::paginate(10);
-
+        $numbers=Pin::paginate(500);
         return view('newadmin.pins',compact('numbers',$numbers));
     }
 

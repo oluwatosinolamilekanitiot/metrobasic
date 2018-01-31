@@ -265,10 +265,8 @@
                   <th>S/N</th>
                   <th>title</th>
                   <th>file</th>
-                  <th>body</th>
-                  {{--  <th>View Post</th>  --}}
+                  <th>email</th>
                   <th>DATE CREATED</th>
-                  
                 </tr>
               </thead>
               <tbody>
@@ -277,11 +275,12 @@
                 <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$post->title}}</td>
-                                <td>{{$post->file}}</td>
-                                {{--  <td>{{$post->body}}</td>
-                                <a href="posts/{{$post->id}}"
-                                <td>{{$post->body}}</td>  --}}
-                                </a>
+                                <td>
+                                  <a href="/images/{{$post->id}}">
+                                    <img class="img-responsive scr="/images{{$post->file_id}}" alt="{{$post->title}}">
+                                  </a>
+                                  </td>
+                                <td>{{ Auth::user()->email}}</td>
                                 <td>{{$post->created_at->toDateTimeString()}}</td>
                 </tr>
                 <tr>

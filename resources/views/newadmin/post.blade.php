@@ -37,7 +37,8 @@
               <tr role="row">
                 <th width="20%" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Department: activate to sort column ascending">S/N</th>
                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Title</th>
-                {{--  <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">File</th>  --}}
+                <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">File</th>
+                <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">email</th>
                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Body</th>
                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Date Created</th>
               
@@ -48,7 +49,13 @@
                 <tr role="row" class="odd">
                     <td>{{$loop->iteration}}</td>
                     <td>{{$post->title}}</td>
-                    {{--  <td>{{$post->file}}</td>  --}}
+                    <td>
+                        <a href="/images/{{$post->id}}">
+                          <img class="img-responsive scr="/images{{$post->file_id}}" alt="{{$post->title}}">
+                        </a>
+                      
+                    </td>
+                    <td>{{ Auth::user()->email}}</td>
                     <td>{{$post->body}}</td>
                     <td>{{$post->created_at->toDateTimeString()}}</td>
               </tr>

@@ -29,11 +29,8 @@ Route::get('adminlogout','Controllers\AdminController@adminlogout');
 
 
 
-// Route::group(['prefix'=> 'admin','middleware'=>'auth'])->group(function () {
-    // Controllers Within The "App\Http\Controllers\Admin" Namespace
     Route::get('adminindex', 'PostsController@adminindex');
     
-// });
 
 
 Route::middleware(['auth'])->group(function () {
@@ -62,7 +59,9 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/posts/tags/{tag}','PostsController@show');
     
     
-    Route::get('/view', 'PostsController@list');
+    Route::get('/view', 'PostsController@lista');
+    Route::get('/images/{file}', 'PostsController@lista');
+    
     Route::get('/reply', 'PostsController@reply');
    
     //end of creating a post
@@ -73,18 +72,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('enterpin','PinsController@create');
     
     //end of links with generation of pins
-
-
     //enter your pin to post questions
     Route::get('/enter','PostsController@enter');    
     Route::post('/enter','PostsController@enterstore');
     // end
 
 });
-
-
-
-
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/signup', 'RegistrationsController@signup');
     Route::post('/signup', 'RegistrationsController@create');
@@ -94,10 +87,7 @@ Route::middleware(['auth'])->group(function () {
     
     //end
 
-    
     Route::get('contactus','Admincontroller@contactus');    
-    
-
 
 Auth::routes();
 

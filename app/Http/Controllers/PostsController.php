@@ -41,14 +41,28 @@ class PostsController extends Controller
     }
     public function show()
     {   
-        $posts  = Post::latest()->get();
-        $posts=Post::paginate(10);
+
+        $posts  = Post::latest()->get()->toarray();
+        
+        // $posts  = Post::latest()->get();
+        $posts=Post::paginate(500);
         return  view ('posts.show',compact('posts',$posts));
     }
 
-    public function list(Post $post)
-    {
-        return view ('posts.list');
+    public function list()
+    {   
+        $images  = Images::latest()->get();
+        dd($images);
+
+        return view ('posts.list',compact(images));
+    }
+
+    public function lista()
+    {   
+        $posts  = Post::latest()->get()->toarray();
+        // dd($posts);
+
+        return view ('posts.list', ['Post' => $posts]);
     }
 
     public function enter()
@@ -132,33 +146,12 @@ class PostsController extends Controller
                         $post->user_id=Auth::user()->id;
                         $post->post_id=Auth::user()->id;
                         $post->title = $request->title;
+                        $post->file = '/images/'.$input['imagename'];
                         $post->body = $request->body;
 
-                        // save images
                 
-                        // if($request->hasFile('file'))
-                        // {
-    
-                        //     $path = Storage::putFile('avatars', $request->file('avatar'));
-
-                        //     $image = $request->file('image');
-                        //     $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-                        // $destinationPath = public_path('images');
-                        //     $img = Image::make($image->getRealPath(),array(
-                        //         'width' => 100,
-                        //         'height' => 100,
-                        //         'grayscale' => false
-                        //     ));
-                        //     $img->save($destinationPath.'/'.$input['imagename']);
-                        //     $destinationPath = public_path('images');
-                        //     $image->move($destinationPath, $input['imagename']);
-                        
-                        // }
-    
-                        
                              $post->save();
 
-            // dd($request->all());       
             if(!$usedPin){
                 $pin = Usedpin::create([
                     'user_id' => Auth::user()->id,
@@ -195,18 +188,6 @@ class PostsController extends Controller
     {
         return view('posts.list', compact('post'));
     }
-
-    // public function inbox(Request $request, $id)
-    // {
-    //     $posts = Post::find($id);
-    //     $reply = Session::has('post') ? Session::get('post') : null;
-    //     $newinbox = new Post($inbox);
-    //     $newinbox->add($posts, $posts->$id);
-    //     dd($request->all());
-    //     $request->session()->put('post',$post);
-    //     return redirect()->route('home');
- 
-    // }
 
     public function comments()
     {

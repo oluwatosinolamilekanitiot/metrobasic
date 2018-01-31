@@ -19,14 +19,29 @@
         <div class="col-sm-6"></div>
         <div class="col-sm-6"></div>
       </div>
-      <form method="POST" action="">
+      <form method="POST" action="/enterpin">
+        {{ csrf_field() }}
+
+        <div class="form-group col-lg-2">
+            <input  class="form-control" style="margin-left:-15px;" type="text" name="random" id="create"  required>
+
+        </div>
+
+             <div class="form-group ">
+                    <input class="btn btn-success" type="submit" name="submit" value="Submit Form">
+                    &nbsp;
+                </div>
+
+
+    </form>
+      {{--  <form method="POST" action="">
          {{ csrf_field() }}
          @component('newadmin.search', ['title' => 'Search'])
           @component('newadmin.two-cols', ['items' => ['Name'], 
           'oldVals' => [isset($searchingVals) ? $searchingVals['pin'] : '']])
           @endcomponent
         @endcomponent
-      </form>
+      </form>  --}}
     <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
       <div class="row">
         <div class="col-sm-12">

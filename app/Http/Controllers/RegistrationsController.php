@@ -28,11 +28,10 @@ class RegistrationsController extends Controller
     {
         
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:users|',
+            'name' => 'required|',
         'email' => 'required|unique:users',
         'number' => 'required|unique:users',
         'password' => 'required|min:8|confirmed',      
-
             ]);
         
         

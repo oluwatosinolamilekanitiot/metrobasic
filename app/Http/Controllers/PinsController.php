@@ -68,8 +68,8 @@ class PinsController extends Controller
         $pin->numbers= $rand_num;
         $pin->save();
         }
-        
-        // $save= \DB::table('pins')->insert('$numbers');
+
+        return back();
     }
     
 

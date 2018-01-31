@@ -15,11 +15,11 @@
 <!-- Slider main container -->
 <div class="swiper-container main-slider" id="myCarousel">
   <div class="swiper-wrapper">
-    <div class="swiper-slide slider-bg-position" style="background:url('http://https://nces.ed.gov/programs/coe/images/nav/coe_hp_new.png')" data-hash="slide1">
-      <h2>Integrity without knowledge is weak and useless, and knowledge without integrity is danger and dreadful</h2>
+    <div class="swiper-slide slider-bg-position" style="background:url('http://nces.ed.gov/programs/coe/images/nav/coe_hp_new.png')" data-hash="slide1">
+      <h2 style="font-size: 20px;">Integrity without knowledge is weak and useless, and knowledge without integrity is danger and dreadful</h2>
     </div>
     <div class="swiper-slide slider-bg-position"  style="background:url('http://grafreez.com/wp-content/temp_demos/burnout/img/3.jpg')" data-hash="slide2">
-      <h2>Happiness is nothing more than good understanding to Education</h2>
+      <h2 style="font-size: 20px;">Happiness is nothing more than good understanding to Education</h2>
     </div>
   </div>
   <!-- Add Pagination -->
@@ -59,7 +59,7 @@
         </div>
         </div>
       </div>
-      <div class="col-md-4"> <img src="http://grafreez.com/wp-content/temp_demos/burnout/img/side-01.jpg" style="height="200px; width="200px";class="img-fluid" /> </div>
+      <div class="col-md-4"> <img src="http://nces.ed.gov/programs/coe/images/nav/coe_hp_new.png" style="height="200px; width="200px";class="img-fluid" /> </div>
     </div>
     <!-- /.row --> 
   </div>

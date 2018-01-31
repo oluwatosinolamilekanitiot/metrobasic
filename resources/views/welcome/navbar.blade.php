@@ -7,13 +7,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Men<span>tro</span></a>
+        <a class="navbar-brand" href="/">Me<span>tro</span></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          {{--  <li><a href="/msg">Inbox</a></li>  --}}
-          {{--  <li><a href="{{route('posts/{post}' ,['id' =>$Post =>id])}}">Inbox</a></li>  --}}
-          
           <li><a href="/enter">Post Question</a></li>
           <li><a href="/courses">Courses</a></li>
           <li class="btn-trial"><a href="/logout
