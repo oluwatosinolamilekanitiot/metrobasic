@@ -108,34 +108,50 @@ class PostsController extends Controller
                 'file' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'body' => 'required',
                 ]);
+
+                if( $request->hasFile('image') ) {
+                        $image = $request->file('image');
+                        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+    
+                        $img = Image::make($image->getRealPath(),array(
+                                    'width' => 100,
+                                    'height' => 100,
+                                    'grayscale' => false
+                                ));
+                            
+                        $destinationPath = public_path();
+                        // dd($destinationPath.'/images/'.$input['imagename']);
+                        $img->save($destinationPath.'/images/'.$input['imagename']);
+                            $destinationPath = public_path('images');
+                            $image->move($destinationPath, $input['imagename']);
+                        
+                        }
+        
                 
-                
-                            $post = new Post;
+                        $post = new Post;
                         $post->user_id=Auth::user()->id;
                         $post->post_id=Auth::user()->id;
                         $post->title = $request->title;
-                        //  $post->file = $request->file;
                         $post->body = $request->body;
-                        //  $post->title = $request->input('title');
 
                         // save images
-
+                
                         // if($request->hasFile('file'))
                         // {
     
-                            $path = Storage::putFile('avatars', $request->file('avatar'));
-                            
-                            $image = $request->file('image');
-                            $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-                        $destinationPath = public_path('images');
-                            $img = Image::make($image->getRealPath(),array(
-                                'width' => 100,
-                                'height' => 100,
-                                'grayscale' => false
-                            ));
-                            $img->save($destinationPath.'/'.$input['imagename']);
-                            $destinationPath = public_path('images');
-                            $image->move($destinationPath, $input['imagename']);
+                        //     $path = Storage::putFile('avatars', $request->file('avatar'));
+
+                        //     $image = $request->file('image');
+                        //     $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+                        // $destinationPath = public_path('images');
+                        //     $img = Image::make($image->getRealPath(),array(
+                        //         'width' => 100,
+                        //         'height' => 100,
+                        //         'grayscale' => false
+                        //     ));
+                        //     $img->save($destinationPath.'/'.$input['imagename']);
+                        //     $destinationPath = public_path('images');
+                        //     $image->move($destinationPath, $input['imagename']);
                         
                         // }
     
