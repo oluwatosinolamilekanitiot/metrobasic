@@ -276,7 +276,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$post->title}}</td>
                                 <td>
-                                  <a href="/images/{{$post->id}}">
+                                  <a href="/views/{{$post->id}}">
                                     <img class="img-responsive scr="/images{{$post->file_id}}" alt="{{$post->title}}">
                                   </a>
                                   </td>

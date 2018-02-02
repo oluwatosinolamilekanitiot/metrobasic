@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -50,7 +51,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required',
             'email' => 'required|email|max:255|unique:users',
-            'number' => 'required|unique:users',
+            'number' => 'required',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }

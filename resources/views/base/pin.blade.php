@@ -7,7 +7,7 @@
         Pins Mangement
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> System Mangement</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> MBM Mangement</a></li>
         <li class="active">Department</li>
       </ol>
     </section>

@@ -6,13 +6,11 @@ namespace App\Http\Controllers;
 use App\User;
 use Auth;
 use Hash;
-
 use Validator;
 use Illuminate\Http\Request;
 
 class RegistrationsController extends Controller
 {
-    //
     public function __construct()
     {
         $this->middleware('guest');
@@ -26,16 +24,14 @@ class RegistrationsController extends Controller
 
     public  function create(Request $request)
     {
-        
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|',
-        'email' => 'required|unique:users',
-        'number' => 'required|unique:users',
-        'password' => 'required|min:8|confirmed',      
-            ]);
-        
-        
-        
+     
+        $request->validate([
+           'name' => 'required',   
+           'email' => 'required|unique:users|max:255',
+           'number' => 'required',
+           'password' => 'required|min:8|confirmed',     
+        ]);
+
         
         $user= New User;
 

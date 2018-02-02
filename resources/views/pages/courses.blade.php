@@ -1,4 +1,4 @@
-<!--Courses-->
+{{--  <!--Courses-->
     <section id ="courses" class="section-padding">
       <div class="container">
         <div class="row">
@@ -74,4 +74,4 @@
         </div>
       </div>
     </section>
-    <!--/ Courses-->
+    <!--/ Courses-->  --}}

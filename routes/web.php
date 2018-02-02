@@ -14,7 +14,7 @@
 
 //index page
 Route::get('/', 'PostsController@index')->name('home');
-Route::get('listc', 'PostsController@listcourses');
+Route::get('courses', 'PostsController@listcourses');
 
 // Route::get('mail', 'MailsController@mail');
 
@@ -59,8 +59,8 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/posts/tags/{tag}','PostsController@show');
     
     
-    Route::get('/view', 'PostsController@lista');
-    Route::get('/images/{file}', 'PostsController@lista');
+    Route::get('/views/{file}', 'PostsController@lista');
+    // Route::get('/images/{file}', 'PostsController@lista');---
     
     Route::get('/reply', 'PostsController@reply');
    

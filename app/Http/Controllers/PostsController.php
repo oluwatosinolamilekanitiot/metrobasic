@@ -52,7 +52,6 @@ class PostsController extends Controller
     public function list()
     {   
         $images  = Images::latest()->get();
-        dd($images);
 
         return view ('posts.list',compact(images));
     }
@@ -61,6 +60,7 @@ class PostsController extends Controller
     {   
         $posts  = Post::latest()->get()->toarray();
         // dd($posts);
+        $posts  = Post::latest()->get();
 
         return view ('posts.list', ['Post' => $posts]);
     }
@@ -75,28 +75,23 @@ class PostsController extends Controller
     public function enterstore(Request $request)
     {
 
-            //validate the form request and save
-            // $validatedData = $request->validate([
-            // 'random' => 'required',
-               
-            // ]);
             $validator = Validator::make($request->all(), [
                 'random' => 'required',
-    
                 ]);
             
-            $pin = Pin::where('numbers', $request->random)->first();
-            if($pin)
-            {
-                // dd('true');
-                return view('posts.create')->with('pin',$pin);
-            }else{
 
-                return view('partials.Epin');
+                $pin = Pin::where('numbers', $request->random)->first();
+                if($pin)
+                {
+                    // dd('true');
+                    return view('posts.create')->with('pin',$pin);
+                }else{
+
+                    return view('partials.Epin');
+                }
+
+
             }
-
-
-    }
 
     
     public function create()
@@ -112,11 +107,6 @@ class PostsController extends Controller
             $usedPin = Usedpin::where('pin_id', $pin->id)->first();
             if(!$usedPin || $usedPin->status <= 3){
                 
-            //     $validatedData = $request->validate([
-            //     'title' => 'required|max:255',
-            //     'body' => 'required',
-            // ]);
-                    
             $validator = Validator::make($request->all(), [
                 'title' => 'required|max:255',
                 'file' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -146,7 +136,8 @@ class PostsController extends Controller
                         $post->user_id=Auth::user()->id;
                         $post->post_id=Auth::user()->id;
                         $post->title = $request->title;
-                        $post->file = '/images/'.$input['imagename'];
+                        // $post->file = '/images/'.$input['imagename'];
+                        $post->file = '/images/'.$request['imagename'];
                         $post->body = $request->body;
 
                 
@@ -176,7 +167,6 @@ class PostsController extends Controller
                 
             }
                 
-        
     }
 
     
